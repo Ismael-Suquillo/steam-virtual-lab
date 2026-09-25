@@ -1,9 +1,26 @@
 :root {
+    /* Tema Oscuro (Predeterminado) */
     --bg-primary: #0f172a;
+    --bg-navbar: #162032;
     --bg-card: #1e293b;
+    --bg-banner: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    --border-color: #334155;
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
+    --footer-bg: #0b1120;
     --font-main: 'Poppins', sans-serif;
+}
+
+[data-theme="light"] {
+    /* Tema Claro */
+    --bg-primary: #f8fafc;
+    --bg-navbar: #ffffff;
+    --bg-card: #ffffff;
+    --bg-banner: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    --border-color: #cbd5e1;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --footer-bg: #e2e8f0;
 }
 
 * {
@@ -17,6 +34,9 @@ body {
     color: var(--text-primary);
     font-family: var(--font-main);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Navbar */
@@ -25,8 +45,9 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.2rem 2.5rem;
-    background-color: #162032;
-    border-bottom: 1px solid #334155;
+    background-color: var(--bg-navbar);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .logo {
@@ -44,11 +65,39 @@ body {
     color: #38bdf8;
 }
 
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Botón de cambio de tema */
+.theme-toggle-btn {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.05);
+}
+
 .user-profile {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    background: #1e293b;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     padding: 0.4rem 1rem;
     border-radius: 20px;
 }
@@ -56,16 +105,19 @@ body {
 /* Dashboard Layout */
 .dashboard-container {
     max-width: 1200px;
+    width: 100%;
     margin: 2rem auto;
     padding: 0 1.5rem;
+    flex: 1; /* Empuja el footer al final de la página */
 }
 
 .welcome-banner {
     margin-bottom: 2.5rem;
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    background: var(--bg-banner);
     padding: 2rem;
     border-radius: 16px;
     border-left: 6px solid #38bdf8;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .welcome-banner h2 {
@@ -91,8 +143,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid #334155;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     position: relative;
     overflow: hidden;
 }
@@ -109,7 +161,7 @@ body {
 
 .module-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 .card-header {
@@ -148,7 +200,8 @@ body {
 }
 
 .badge {
-    background-color: #334155;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
     color: var(--text-primary);
     padding: 0.3rem 0.8rem;
     border-radius: 12px;
@@ -168,4 +221,41 @@ body {
 
 .btn-explore:hover {
     opacity: 0.9;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--footer-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 1.5rem 2.5rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-top: 3rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #38bdf8;
 }
