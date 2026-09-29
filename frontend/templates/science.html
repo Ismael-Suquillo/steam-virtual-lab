@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - STEAM Lab</title>
+
+    <!-- dashboard.css define el tema y la navbar; science.css el simulador -->
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/science.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Barra de navegación (misma estructura que el dashboard) -->
+    <header class="navbar">
+        <a href="{% url 'dashboard' %}" class="logo">
+            <span class="logo-icon">🚀</span>
+            <h1>STEAM<span>Lab</span></h1>
+        </a>
+
+        <div class="nav-controls">
+            <!-- Los id deben ser exactamente estos: theme.js los busca -->
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+                <span id="theme-icon">🌙</span>
+                <span id="theme-text">Oscuro</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="science-container">
+        <a href="{% url 'dashboard' %}" class="back-link">← Volver al Dashboard</a>
+
+        <!--Encabezado del módulo-->
+        <section class="module-header">
+            <h2>🔬 {{ title|default:"Módulo de Ciencias"}}</h2>
+            <p>Modifica la gravedad y observa cómo cambian las órbitas de los planetas.</p>
+        </section>
+
+        <!--Cuadrídula: canvas a la izquierda, controles a la derecha-->
+        <section class="simulator-layout">
+            <div class="canvas-wrapper">
+                <canvas id="spaceCanvas" width="800" height="550">
+                    Tu navegador no soporta el elemento canvas de HTML5.
+                </canvas>
+            </div>
+
+            <aside class="control-panel">
+                <h3>⚙️ Controles del Experimento</h3>
+
+                <!--1. Control de gravedad-->
+                <div class="control-group">
+                    <label for="gravityRange">
+                        Gravedad(G): <span id="gravityVal">0.3</span>
+                    </label>
+                    <input type="range" id="gravityRange" min="0.1" max="1" step="0.1" value="0.3">
+                </div>
+
+                <!--Control 2: velocidad de la simulación-->
+                <div class="control-group">
+                    <label for="speedRange">
+                        Velocidad: <span id="speedVal">1.0x</span>
+                    </label>
+                    <input type="range" id="speedRange" min="0.5" max="2" step="0.5" value="1">
+                </div>
+                
+                <!--Control 3: agregar cuerpos-->
+                <div class="btn-group">
+                    <button id="addPlanetBtn" class="btn-action">🪐 + Planeta</button>
+                    <button id="addCometBtn" class="btn-action">☄️ + Cometa</button>
+                </div>
+
+                <!--Control 4: pausar y reiniciar-->
+                <div class="btn-group">
+                    <button id="pauseBtn" class="btn-primary">⏸️ Pausar</button>
+                    <button id="resetBtn" class="btn-secondary">🔄 Reiniciar</button>
+                </div>
+
+                <!--Concepto educativo-->
+                <div class="concept-card">
+                    <h4>💡 ¿Qué está pasando?</h4>
+                    <p>
+                        El Sol atrae a cada planeta con una fuerza que depende de la gravedad (G)
+                        y de la distancia: cuanto más cerca, más fuerte. Si aumentas G, los
+                        planetas se aceleran y sus órbitas se cierran.
+                    </p>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/science_canvas.js' %}"></script>
+</body>
+
+</html>

@@ -50,5 +50,8 @@ def dashboard_view(request):
 
     return render(request, 'dashboard.html', context)
 
+def science_module_view(request):
+    return render(request, 'science.html', {'title': 'Módulo S - Simulador de Gravedad Espacial'})
+
 
 # Create your views here.
